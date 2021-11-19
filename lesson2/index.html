@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class = "timer">
+        <div class = "time--txt" id = "time--txt">
+            <div class="txt--hr" id = "txt--hr">
+                00:
+            </div>
+            <div class="txt--min" id = "txt--min">
+                00:
+            </div>
+            <div class="txt--sec" id = "txt--sec">
+                00
+            </div>
+        </div>
+        <button class = "time--start" id = "start" onclick = changeText() >
+            Start
+        </button>
+        <button class = "time--pause" id = "pause">
+            Pause
+        </button>
+        <button class = "time--resume" id = "resume">
+            Resume
+        </button>
+        <button class = "time--stop" id = "stop">
+            Stop
+        </button>
+    </div>
+    <script src = ./script.js></script>
+</body>
+</html>

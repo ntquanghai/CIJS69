@@ -1,0 +1,47 @@
+body {
+    margin: 0;
+}
+
+.timer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+}
+
+.time--txt {
+    text-align: center;
+    margin: 0px 0px 10px 0px;
+}
+
+.txt--hr {
+    font-size: 32px;
+    display: inline-block;
+}
+
+.txt--min {
+    font-size: 32px;
+    display: inline-block;
+}
+
+.txt--sec {
+    font-size: 32px;
+    display: inline-block;
+}
+
+.time--start {
+    font-size: 18px;
+}
+
+.time--pause {
+    font-size: 18px;
+}
+
+.time--stop {
+    font-size: 18px;
+}
+
+.time--resume {
+    font-size: 18px;
+    display: none;
+}
