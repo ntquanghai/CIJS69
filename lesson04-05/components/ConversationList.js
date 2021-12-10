@@ -1,20 +1,39 @@
 import ConversationItem from "./ConversationItem.js";
 import CreateNewConversationModal from "./CreateNewConversationModal.js";
 import modalInput from "./modalInput.js";
+import {
+  getAuth,
+} from "https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js";
+import {
+  getFirestore, addDoc, collection, query, where, getDoc, doc, onSnapshot
+} from "https://www.gstatic.com/firebasejs/9.5.0/firebase-firestore.js"
+import Main from "./Main.js";
+
+const auth = getAuth();
+const db = getFirestore();
+const conversationRef = collection(db, "conversations");
+export let nameDisplayed;
 
 export default class ConversationList {
   $conversationListProfile
   $conversationListProfilePicture
   $coversationListProfileName
-  $conversationItem;
   $newConversationImgContainer;
   $newConversationImg;
   $newConversationButtonContainer;
   $createConversationModal;
   $conversationItem;
   $modalInput;
+  $conversationListContainer;
+  $conversationListContent;
 
   constructor() {
+    this.$conversationListContainer = document.createElement("div");
+    this.$conversationListContainer.setAttribute(
+      "class",
+      "w-1/6 h-full bg-blue-100 pb-4 flex flex-col border-r-2 border-gray-300"
+    );
+
     this.$conversationListProfile = document.createElement("div");
     this.$conversationListProfile.setAttribute("class","flex h-20 bg-blue-300 border-b-2 border-gray-300 p-4");
 
@@ -25,11 +44,13 @@ export default class ConversationList {
     this.$conversationListProfileName.textContent = "Username";
     this.$conversationListProfileName.setAttribute("class","flex-grow ml-4 my-auto text-lg");
 
-    this.$conversationItem = new ConversationItem();
+    this.$conversationListContent = document.createElement("div");
+
     this.$createConversationModal = new CreateNewConversationModal();
 
     this.$newConversationImgContainer = document.createElement("div");
     this.$newConversationImgContainer.setAttribute("class","inline-block m-auto");
+
     
     this.$newConversationImg = document.createElement("img");
     this.$newConversationImg.src = "./img/add.png";
@@ -37,25 +58,47 @@ export default class ConversationList {
     this.$newConversationImg.addEventListener("click", () => {
       this.$createConversationModal.openModal();
     });
+    // this.setUpConversationListener();
   }
+  // async setUpConversationListener() {
+  //   this.$conversationListContent.innerHTML = "";
+
+  //   const q = query(
+  //     conversationRef,
+  //     where("users", "array-contains", auth.currentUser.email)
+  //   );
+
+  //   onSnapshot(q, (snapshot) => {
+  //     snapshot.docChanges().forEach((change) => {
+  //       if (change.type === "added") {
+  //         const conversationItem = new ConversationItem(change.doc.data());
+          
+  //         conversationItem.$itemContainer.addEventListener("focus", () => {
+  //           console.log(change.doc.data().name);
+  //         })
+  //         conversationItem.render(this.$conversationListContent);
+  //       }
+  //     });
+  //   });
+  // }
+
 
   render(mainContainer) {
-    const conversationListContainer = document.createElement("div");
-    conversationListContainer.setAttribute(
-      "class",
-      "w-1/6 h-full bg-blue-100 pb-4 flex flex-col border-r-2 border-gray-300"
-    );
     this.$conversationListProfile.appendChild(this.$conversationListProfilePicture);
     this.$conversationListProfile.appendChild(this.$conversationListProfileName);
-    conversationListContainer.appendChild(this.$conversationListProfile);
-    
+    this.$conversationListContainer.appendChild(this.$conversationListProfile);
+    this.$conversationListContainer.appendChild(this.$conversationListContent);
+        
     this.$conversationListProfile.appendChild(this.$newConversationImgContainer);
     this.$newConversationImgContainer.appendChild(this.$newConversationImg);
-    conversationListContainer.app;
+    this.$conversationListContainer.app;
     
-    this.$createConversationModal.render(conversationListContainer);
-    this.$conversationItem.render(conversationListContainer);
+    this.$createConversationModal.render(this.$conversationListContainer);
+    
 
-    mainContainer.appendChild(conversationListContainer);
+    mainContainer.appendChild(this.$conversationListContainer);
+  }
+  displayText = (text) => {
+
   }
 }

@@ -18,6 +18,16 @@ export default class modalInput {
       this.$modalInputContainer.appendChild(this.$modalTxt);
       this.$modalInputContainer.appendChild(this.$modalInput);
     }
+
+    getInputValue() {
+      return this.$modalInput.value;
+    }
+    
+    clearInputValue() {
+      this.$modalInput.value = "";
+      return this.$modalInput;
+    }
+
     render(container) {
       container.appendChild(this.$modalInputContainer)
     }
