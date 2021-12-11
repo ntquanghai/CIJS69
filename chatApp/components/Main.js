@@ -70,6 +70,8 @@ export default class Main {
           })
           conversationItem.$itemContainer.addEventListener('focusout', () => {
             conversationItem.$itemContainer.classList.remove("bg-blue-200");
+            this.$headerContent.textContent = "";
+            this.$headerImg.setAttribute("class","");
           })
           conversationItem.render(this.$conversationList.$conversationListContent);
         }
