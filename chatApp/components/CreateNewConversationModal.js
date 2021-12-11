@@ -29,7 +29,7 @@ export default class CreateNewConversationModal {
       "class",
       "modal fixed w-1/3 h-1/2 hidden top-1/2 left-1/2 -translate-x-2/4 -translate-y-2/4 bg-blue-300 pt-4 flex flex-col rounded-md border-2"
     );
-    // this.$modalContainer.addEventListener("submit", this.onSubmit);
+    this.$modalContainer.addEventListener("submit", this.onSubmit);
 
     this.$modalName = document.createElement("div");
     this.$modalName.textContent = "ADD NEW CONVERSATION"
@@ -53,16 +53,15 @@ export default class CreateNewConversationModal {
     this.$modalCancelButton = document.createElement("button");
     this.$modalCancelButton.textContent = "Cancel";
     this.$modalCancelButton.setAttribute("class","bg-white p-1 mr-4 rounded");
-    this.$modalCancelButton.addEventListener("click", () => {
+    this.$modalCancelButton.addEventListener("click", (e) => {
+      e.preventDefault();
       this.openModal();
     })
 
     this.$modalCreateButton = document.createElement("button");
     this.$modalCreateButton.textContent = "Create";
     this.$modalCreateButton.setAttribute("class","bg-white p-1 rounded");
-    this.$modalCreateButton.addEventListener("click", () => {
-      this.onSubmit();
-    })
+    // 
 
     this.$modalCloseContainer.appendChild(this.$modalCancelButton);
     this.$modalCloseContainer.appendChild(this.$modalCreateButton);
