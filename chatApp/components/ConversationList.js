@@ -82,7 +82,6 @@ export default class ConversationList {
   //   });
   // }
 
-
   render(mainContainer) {
     this.$conversationListProfile.appendChild(this.$conversationListProfilePicture);
     this.$conversationListProfile.appendChild(this.$conversationListProfileName);
