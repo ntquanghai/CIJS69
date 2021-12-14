@@ -12,7 +12,6 @@ import Main from "./Main.js";
 const auth = getAuth();
 const db = getFirestore();
 const conversationRef = collection(db, "conversations");
-export let nameDisplayed;
 
 export default class ConversationList {
   $conversationListProfile
@@ -27,7 +26,10 @@ export default class ConversationList {
   $conversationListContainer;
   $conversationListContent;
 
-  constructor() {
+  _onChangeActiveConversation;
+
+  constructor(onChangeActiveConversation) {
+    this._onChangeActiveConversation = onChangeActiveConversation;
     this.$conversationListContainer = document.createElement("div");
     this.$conversationListContainer.setAttribute(
       "class",
@@ -58,9 +60,9 @@ export default class ConversationList {
     this.$newConversationImg.addEventListener("click", () => {
       this.$createConversationModal.openModal();
     });
-    // this.setUpConversationListener();
+    this.setUpConversationListener();
   }
-  // async setUpConversationListener() {
+  // setUpConversationListener() {
   //   this.$conversationListContent.innerHTML = "";
 
   //   const q = query(
@@ -71,7 +73,10 @@ export default class ConversationList {
   //   onSnapshot(q, (snapshot) => {
   //     snapshot.docChanges().forEach((change) => {
   //       if (change.type === "added") {
-  //         const conversationItem = new ConversationItem(change.doc.data());
+  //         const conversationItem = new ConversationItem(
+  //           ...change.doc.data(),
+  //           conversationId: change.doc.id,
+  //           );
           
   //         conversationItem.$itemContainer.addEventListener("focus", () => {
   //           console.log(change.doc.data().name);
@@ -81,6 +86,30 @@ export default class ConversationList {
   //     });
   //   });
   // }
+
+  setUpConversationListener() {
+    this.$conversationListContent.innerHTML = "";
+    const q = query(
+      conversationRef,
+      where("users", "array-contains", auth.currentUser.email)
+    );
+
+    onSnapshot(q, (snapshot) => {
+      snapshot.docChanges().forEach((change) => {
+        if (change.type === "added") {
+          const conversationItem = new ConversationItem({
+              ...change.doc.data(),
+              conversationId: change.doc.id,
+            },
+            ((conversation) => {
+              this._onChangeActiveConversation(conversation);
+            })
+          );
+          conversationItem.render(this.$conversationListContent);
+        }
+      });
+    });
+  }
 
   render(mainContainer) {
     this.$conversationListProfile.appendChild(this.$conversationListProfilePicture);

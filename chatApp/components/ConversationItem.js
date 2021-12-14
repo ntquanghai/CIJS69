@@ -5,8 +5,10 @@ export default class ConversationItem {
   $itemProfilePicture
   $itemName
   conversation
+  _onChange;
 
-  constructor(nameData) {
+  constructor(nameData, onChange) {
+    this._onChange = onChange;
     this.conversation = nameData;
     this.$itemContainer = document.createElement("div");
     this.$itemContainer.tabIndex = 0;
