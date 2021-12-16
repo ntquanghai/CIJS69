@@ -82,7 +82,7 @@ export default class Main {
     this.$contentChat.appendChild(this.$chatSend);
 
 
-    this.$title.render(this.$mainContainer)
+    this.$title.render(this.$contentContainer)
     this.$contentContainer.appendChild(this.$chatBox);
     this.$contentContainer.appendChild(this.$contentChat);
     

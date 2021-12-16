@@ -1,5 +1,5 @@
-import registerMain from "./Register.js";
-import logInMain from "./Login.js"
+import registerMain from "./logInComponents/Register.js";
+import logInMain from "./logInComponents/Login.js"
 
 class Main {
     activeScreen

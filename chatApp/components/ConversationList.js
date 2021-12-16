@@ -114,10 +114,11 @@ export default class ConversationList {
   render(mainContainer) {
     this.$conversationListProfile.appendChild(this.$conversationListProfilePicture);
     this.$conversationListProfile.appendChild(this.$conversationListProfileName);
+    this.$conversationListProfile.appendChild(this.$newConversationImgContainer);
     this.$conversationListContainer.appendChild(this.$conversationListProfile);
     this.$conversationListContainer.appendChild(this.$conversationListContent);
         
-    this.$conversationListProfile.appendChild(this.$newConversationImgContainer);
+
     this.$newConversationImgContainer.appendChild(this.$newConversationImg);
     this.$conversationListContainer.app;
     

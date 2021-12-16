@@ -5,7 +5,7 @@ import logButton from "./featureButton.js"
 import accInfoBox from "./accInfoBox.js"
 import switchBox from "./switchBox.js"
 import logInMain from "./Login.js"
-import app from "./index.js"
+import app from "../index.js"
 
 export default class registerMain {
     $mainContainer
